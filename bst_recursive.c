@@ -71,63 +71,82 @@ Node * insertRec(int value,Node *n)
   }
 }
 
-void deleteRec(int value,Node *n)
+Node * deleteRec(int value,Node *root)
 {
-  Node * temp,*parent;
-  parent = n->parent; // parent of node n
+  Node * temp,*parent,*n;
+  parent = root->parent; // parent of node n
 
-  if(n->value == value)//do this if the values are equal
+  if(root->value == value)//do this if the values are equal
   {
-    if(!n->left && !n->right)//if it has no children just delete the node
+    if(!root->left && !root->right)//if it has no children just delete the node
     {
-      childToNull(n);//sets parents pointer to child to null
-      deleteNode(n);//delete the node
+
+      //root->parent = childToNull(root);//sets parents pointer to child to null
+      deleteNode(root);//delete the node
+      return NULL;
     }
 
-    else if(n->right)// as long as it has a right child do this
+    else if(root->right)// as long as it has a right child do this
     {
-      temp = findMinRec(n->right);//find the smallest node on the right side
-      n->value = temp->value;//set this nodes value equal to that nodes value
-      parent = temp->parent;
+      temp = findMinRec(root->right);//find the smallest node on the right side
+      //printf("smallest val is %d\n",temp->value);
+      //set this nodes value equal to that nodes value
+      //parent = temp->parent;
       if(temp->right)
       {//make parent point to right child; make right child point to parent
-        parent->left = temp->right;
         //temp must be the parents left child;it is the smallest in the subtree
-        temp->right->parent = parent;
+        printf("has right");
+        if(isRightChild(temp))
+          temp->parent->right = temp->right;
+        if(isLeftChild(temp))
+          temp->parent->left = temp->right;
+        temp->right->parent = temp->parent;
+
+        root->value = temp->value;
+        deleteNode(temp);//delete the node for the smallest pointer
+        return root;
       }
       else
       {
-        childToNull(n);//sets parents pointer to child to null
+        root->right = childToNullRec(root,temp);
+        root->value = temp->value;
+        deleteNode(temp);
+        return root;//sets parents pointer to child to null
       }
-      deleteNode(temp);//delete the node for the smallest pointer
+
+
     }
 
-    else// if the right child is null
+    else if(!root->right)// if the right child is null
     {
-      if(n==parent->left)
+      temp = root->left;
+      if(isLeftChild(root))
       {
-        parent->left = n->left;
+        parent->left = root->left;
       }
-      else if(n==parent->right)
+      else if(isRightChild(root))
       {
-        parent->right = n->left;
+        parent->right = root->left;
       }
-      n->left->parent = parent;
-      deleteNode(n);
+      root->left->parent = parent;
+      deleteNode(root);
+      return temp;
     }
 
   }
-  else if (n->value != value && !n->left && !n->right)
+  else if(root->value > value)
   {
-    printf("value is not in tree.\n");
+      root->left = deleteRec(value,root->left);
+      return root;
   }
-  else if(n->value > value)
+  else if(root->value<value)
   {
-    deleteRec(value,n->left);
+    root->right = deleteRec(value,root->right);
+    return root;
   }
-  else if(n->value < value)
+  else
   {
-    deleteRec(value,n->right);
+    printf("value not in tree\n");
   }
 }
 
@@ -220,11 +239,48 @@ Node *findMaxRec(Node *n)
   }
 }
 
+Node * childToNullRec(Node * root,Node *n)
+{
+  Node * temp;
+  //printBstRec(root);
+  //printf("\n");
+  if(root->left->value == n->value)
+  {
+    root->left = NULL;
+    return root;
+  }
+  else if(root->right->value == n->value)
+  {
+    root->right = NULL;
+    return root;
+  }
+  else if(root->value > n->value)
+  {
+    //printBstRec(root);
+    //printf("\n");
+    temp = childToNullRec(root->left,n);
+    //printBstRec(temp);
+    //printf("\n");
+    return temp;
+  }
+  else if(root->value)
+  {
+    //printBstRec(root);
+    //printf("\n");
+    temp = childToNullRec(root->right,n);
+    //printBstRec(temp);
+    //printf("\n");
+    return temp;
+  }
+}
+
 void printBstRec(Node *n)
 {
   if(!n)
     return;
+
   printBstRec(n->left);
   printf("%d\n",n->value);
   printBstRec(n->right);
+
 }

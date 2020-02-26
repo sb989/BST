@@ -12,7 +12,6 @@ typedef struct Node_s
 
 Node * newNode();
 void deleteNode(Node *n);
-void childToNull(Node *n);
 int isLeftChild(Node *n);
 int isRightChild(Node *n);
 
