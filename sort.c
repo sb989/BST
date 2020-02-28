@@ -9,7 +9,7 @@ int * sort(int *unsorted,int size)
   sNode * stack;
   root = NULL;
   int * output;
-  output = malloc(size);
+  output = (int*)malloc(size*sizeof(int));
   printf("size of count is %d\n",size);
   //size = size+1;
   printf("size of count is %d\n",size);
