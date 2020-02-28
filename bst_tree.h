@@ -14,6 +14,7 @@ Node * newNode();
 void deleteNode(Node *n);
 int isLeftChild(Node *n);
 int isRightChild(Node *n);
+void deleteTree(Node *root);
 
 
 

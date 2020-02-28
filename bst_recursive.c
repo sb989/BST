@@ -37,6 +37,21 @@ Node * largerAncestorRec(Node *n,int value)
   }
 }
 
+Node * smallerAncestorRec(Node *n,int value)
+{
+  if(n->value < value)
+    return n;
+  else if(n->value >= value && n->parent)
+  {
+    return smallerAncestorRec(n->parent,value);
+  }
+  else
+  {
+    printf("%d has not ancestor that is smaller\n",value);
+    return NULL;
+  }
+}
+
 Node * insertRec(int value,Node *n)
 {
   Node * temp;
@@ -190,7 +205,8 @@ Node * findNextRec(Node *root,int value)
 
 Node * findPrevRec(Node *root,int value)
 {
-  Node * temp = binarySearchRec(root,value);
+  Node * temp,*ancestor;
+  temp = binarySearchRec(root,value);
   if(temp)
   {
     if(temp->left)
@@ -200,6 +216,17 @@ Node * findPrevRec(Node *root,int value)
     else if(temp->parent && isRightChild(temp))
     {
       return temp->parent;
+    }
+    else if(temp->parent && isLeftChild(temp))
+    {
+      ancestor = smallerAncestorRec(temp,temp->value);
+      if(ancestor)
+        return ancestor;
+      else
+      {
+        printf("%d does not have a predecessor in this tree.\n",value);
+        return NULL;
+      }
     }
     else
     {
@@ -254,7 +281,7 @@ Node * childToNullRec(Node * root,Node *n)
     root->right = NULL;
     return root;
   }
-  else if(root->value > n->value)
+  else if(root->value > n->parent->value)
   {
     //printBstRec(root);
     //printf("\n");
@@ -263,7 +290,7 @@ Node * childToNullRec(Node * root,Node *n)
     //printf("\n");
     return temp;
   }
-  else if(root->value)
+  else if(root->value < n->parent->value)
   {
     //printBstRec(root);
     //printf("\n");
