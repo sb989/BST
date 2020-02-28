@@ -1,10 +1,11 @@
 #include "bst_recursive.h"
 #include "bst_iterative.h"
 #include "sort.h"
+#include "rand_array.h"
 int main()
 {
   Node *root,*temp;
-  int i,*arr2;
+  int i,*arr2,*random;
   int arr[] = {20,8,22,12,4,10,14,24,21,25};
   root = NULL;
   int size;
@@ -49,6 +50,10 @@ int main()
   {
     printf("sort test value is %d\n",arr2[i]);
   }
-
+  random = getRandomArray(20);
+  for(i=0;i<20;i++)
+  {
+    printf("random[%d] is %d\n",i,random[i]);
+  }
 
 }
