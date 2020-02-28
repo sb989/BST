@@ -2,10 +2,11 @@
 #include "bst_iterative.h"
 #include "sort.h"
 #include "rand_array.h"
+#include "s_array.h"
 int main()
 {
   Node *root,*temp;
-  int i,*arr2,*random;
+  int i,*arr2,*random,*sarray;
   int arr[] = {20,8,22,12,4,10,14,24,21,25};
   root = NULL;
   int size;
@@ -56,4 +57,9 @@ int main()
     printf("random[%d] is %d\n",i,random[i]);
   }
 
+  sarray = getSortedArray(20);
+  for(i=0;i<20;i++)
+  {
+    printf("%d\n",sarray[i]);
+  }
 }
