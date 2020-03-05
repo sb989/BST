@@ -3,7 +3,7 @@
 int * getRandomArray(int n)
 {
   int * output,count,r,i;
-  output = malloc(n*sizeof(int));
+  output = (int*) malloc(n*sizeof(int));
   count = 0;
   while(count <n)
   {
@@ -24,7 +24,7 @@ int * getRandomArray(int n)
       {
         output[i+1] = r;
         count = count +1;
-        printf("count is %d\n",count);
+        //printf("count is %d\n",count);
         break;
       }
       else if(r== output[i])

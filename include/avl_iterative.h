@@ -13,6 +13,8 @@ Node * rotateRight(Node * r);
 Node * avlDeleteIter(Node *root,int value);
 Node *deleteBalance(Node * root);
 Node * insertBalance(Node *root);
+int getAvlCount();
+void setAvlCount(int c);
 
 
 

@@ -8,4 +8,7 @@ Node * findPrevIter(Node * root,int value);
 Node * findMinIter(Node *n);
 Node * findMaxIter(Node *n);
 Node * largerAncestorIter(Node *n,int value);
+int getBstCount();
+void setBstCount(int c);
+
 #endif

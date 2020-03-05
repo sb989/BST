@@ -52,7 +52,7 @@ Node * smallerAncestorRec(Node *n,int value)
   }
 }
 
-Node * insertRec(int value,Node *n)
+Node * insertRec(Node *n,int value)
 {
   Node * temp;
   //printf("inserting\n");
@@ -66,7 +66,7 @@ Node * insertRec(int value,Node *n)
   }
   else if(n->value > value)
   {
-    temp = insertRec(value,n->left);
+    temp = insertRec(n->left,value);
     if(!n->left)
     {
       n->left = temp;
@@ -76,7 +76,7 @@ Node * insertRec(int value,Node *n)
   }
   else if(n->value < value)
   {
-    temp = insertRec(value,n->right);
+    temp = insertRec(n->right,value);
     if(!n->right)
     {
       n->right = temp;
@@ -86,7 +86,7 @@ Node * insertRec(int value,Node *n)
   }
 }
 
-Node * deleteRec(int value,Node *root)
+Node * deleteRec(Node *root,int value)
 {
   Node * temp,*parent,*n;
   parent = root->parent; // parent of node n
@@ -151,12 +151,12 @@ Node * deleteRec(int value,Node *root)
   }
   else if(root->value > value)
   {
-      root->left = deleteRec(value,root->left);
+      root->left = deleteRec(root->left,value);
       return root;
   }
   else if(root->value<value)
   {
-    root->right = deleteRec(value,root->right);
+    root->right = deleteRec(root->right,value);
     return root;
   }
   else

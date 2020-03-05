@@ -1,5 +1,7 @@
 #include "bst_iterative.h"
 
+static int count = 0;
+
 Node * insertIter(Node *root,int value)
 {
   Node *parent,*curr;
@@ -35,14 +37,27 @@ Node * insertIter(Node *root,int value)
     {
       parent = curr;
       curr = curr->left;
+      count = count +1;
     }
     else if(curr->value < value)
     {
       parent = curr;
       curr = curr->right;
+      count = count +1;
     }
   }
+  //printf("count for bst iterative is %d\n",count);
   return root;
+}
+
+int getBstCount()
+{
+  return count;
+}
+
+void setBstCount(int c)
+{
+  count = c;
 }
 
 Node * deleteIter(int value,Node *n)

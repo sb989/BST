@@ -15,7 +15,7 @@ int * sort(int *unsorted,int size)
   printf("size of count is %d\n",size);
   for(i=0;i<size;i++)
   {
-    root = insertRec(unsorted[i],root);
+    root = insertRec(root,unsorted[i]);
   }
   printBstRec(root);
   curr = root;

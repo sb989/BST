@@ -1,8 +1,8 @@
 #ifndef __BST_RECURSIVE_H_
 #define __BST_RECURSIVE_H_
 #include "bst_tree.h"
-Node * insertRec(int value,Node *n);
-Node * deleteRec(int value,Node *n);
+Node * insertRec(Node *root,int value);
+Node * deleteRec(Node *root,int value);
 Node * findNextRec(Node *root,int value);
 Node * findPrevRec(Node *root,int value);
 Node * findMinRec(Node *n);

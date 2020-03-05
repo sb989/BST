@@ -19,6 +19,21 @@ void * pop(Stack ** top)
   }
 }
 
+void freeStack(Stack **top)
+{
+  Stack *temp,*next;
+  if(!*top)
+  {
+    return;
+  }
+  temp = *top;
+  while(temp)
+  {
+    next = temp->next;
+    free(temp);
+    temp = next;
+  }
+}
 void * peek(Stack **top)
 {
   if(empty(*top))
@@ -56,6 +71,7 @@ Stack * newStack(void * data)
 
 void freeNode(Stack *stack)
 {
+  free(stack->data);
   free(stack);
 }
 

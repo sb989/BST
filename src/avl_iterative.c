@@ -1,8 +1,12 @@
 #include "avl_iterative.h"
 
+static int count = 0;
+
 Node * avlInsertIter(Node * root,int value)
 {
   Node *parent,*curr;
+
+  //count = 0;
   if(root)
     parent = root->parent;
   else
@@ -35,15 +39,27 @@ Node * avlInsertIter(Node * root,int value)
     {
       parent = curr;
       curr = curr->left;
+      count = count +1;
     }
     else if(curr->value < value)
     {
       parent = curr;
       curr = curr->right;
+      count = count +1;
     }
   }
   root = insertBalance(curr);
   return root;
+}
+
+int getAvlCount()
+{
+  return count;
+}
+
+void setAvlCount(int c)
+{
+  count = c;
 }
 
 Node * avlDeleteIter(Node *n,int value)

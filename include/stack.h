@@ -15,5 +15,6 @@ Stack * push(Stack **top,void * data);
 Stack * newStack(void * data);
 int empty(Stack *top);
 void freeNode(Stack *stack);
+void freeStack(Stack **top);
 
 #endif

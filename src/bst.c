@@ -9,6 +9,8 @@ Node *newNode()
   return temp;
 }
 
+
+
 void deleteNode(Node *n)
 {
   free(n);
@@ -75,14 +77,10 @@ int height(Node * root)
 {
   Node * curr,*temp;
   Stack * stack,*lstack,*rstack;
-  int max,ret,*v,*neg_one,*zero;
+  int max,ret,*v;
   curr = root;
   ret = 0;
   max = -2;
-  neg_one = (int*)malloc(sizeof(int));
-  *neg_one = -1;
-  zero = (int*)malloc(sizeof(int));
-  *zero = 0;
   lstack = NULL;
   rstack = NULL;
   stack =NULL;
@@ -114,9 +112,17 @@ int height(Node * root)
       else
       {
         if(!temp->left)
-          lstack = push(&lstack,neg_one);
+        {
+          v =(int*)malloc(sizeof(int));
+          *v = -1;
+          lstack = push(&lstack,v);
+        }
         if(!temp->right)
-          rstack = push(&rstack,neg_one);
+        {
+          v =(int*)malloc(sizeof(int));
+          *v = -1;
+          rstack = push(&rstack,v);
+        }
         max = maxVal(*(int*)pop(&lstack),*(int*)pop(&rstack));
         if(!temp->parent)
         {
@@ -142,6 +148,8 @@ int height(Node * root)
       break;
     }
   }
+  freeStack(&lstack);
+  freeStack(&rstack);
   return ret;
 }
 
