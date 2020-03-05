@@ -11,5 +11,6 @@ Node * binarySearchRec(Node *root,int value);
 Node * largerAncestorRec(Node *n,int value);
 void printBstRec(Node *n);
 Node * childToNullRec(Node * root,Node *n);
-
+void printLevelOrder(Node *root);
+void printLevel(Node *root,int level);
 #endif

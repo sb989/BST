@@ -6,7 +6,7 @@ int * sort(int *unsorted,int size)
 {
   Node * root,*curr,*parent;
   int i,count;
-  sNode * stack;
+  Stack * stack;
   root = NULL;
   int * output;
   output = (int*)malloc(size*sizeof(int));
@@ -21,7 +21,7 @@ int * sort(int *unsorted,int size)
   curr = root;
   parent = root->parent;
   count = 0;
-
+  stack = NULL;
   while(count < size)
   {
     if(curr)
@@ -33,7 +33,7 @@ int * sort(int *unsorted,int size)
     {
       if(!empty(stack))
       {
-        curr = pop(&stack);
+        curr = (Node *)pop(&stack);
         //printf("%d count is %d\n",curr->value,count);
         output[count] = curr->value;
         count = count +1;

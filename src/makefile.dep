@@ -1,0 +1,18 @@
+avl_iterative.o: avl_iterative.c ../include/avl_iterative.h \
+ ../include/bst_tree.h ../include/stack.h ../include/bst_iterative.h
+bst.o: bst.c ../include/bst_tree.h ../include/stack.h \
+ ../include/bst_tree.h
+bst_iterative.o: bst_iterative.c ../include/bst_iterative.h \
+ ../include/bst_tree.h ../include/stack.h
+bst_recursive.o: bst_recursive.c ../include/bst_recursive.h \
+ ../include/bst_tree.h ../include/stack.h
+rand_array.o: rand_array.c ../include/rand_array.h
+s_array.o: s_array.c ../include/s_array.h
+sort.o: sort.c ../include/sort.h ../include/bst_recursive.h \
+ ../include/bst_tree.h ../include/stack.h ../include/stack.h
+stack.o: stack.c ../include/stack.h ../include/bst_tree.h \
+ ../include/stack.h
+test.o: test.c ../include/bst_recursive.h ../include/bst_tree.h \
+ ../include/stack.h ../include/bst_iterative.h ../include/sort.h \
+ ../include/rand_array.h ../include/s_array.h ../include/avl_iterative.h \
+ ../include/bst_iterative.h

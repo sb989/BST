@@ -1,6 +1,6 @@
 #include "bst_iterative.h"
 
-Node * insertIter(int value,Node *root)
+Node * insertIter(Node *root,int value)
 {
   Node *parent,*curr;
   if(root)
@@ -27,8 +27,8 @@ Node * insertIter(int value,Node *root)
       }
 
       curr->value = value;
-      if(!root)
-        return curr;
+      if(!root)// if the root given is null return the curr node
+        return curr;// only happens when the first element is added
       break;
     }
     if(curr->value > value)
@@ -48,7 +48,10 @@ Node * insertIter(int value,Node *root)
 Node * deleteIter(int value,Node *n)
 {
   Node * curr,*parent,*temp;
-  parent = n->parent;
+  if(!n)
+    return NULL;
+  if(n->parent)
+    parent = n->parent;
   curr = n;
   while(1)
   {
@@ -65,7 +68,7 @@ Node * deleteIter(int value,Node *n)
       }
       else if(curr->right)
       {
-        temp = findMinIter(temp->right);
+        temp = findMinIter(curr->right);
         if(temp->right)
         {
           if(isRightChild(temp))
@@ -79,10 +82,10 @@ Node * deleteIter(int value,Node *n)
         }
         else
         {
-          if(isRightChild(curr))
-            curr->parent->right = NULL;
-          else if(isLeftChild(curr))
-            curr->parent->left =NULL;
+          if(isRightChild(temp))
+            temp->parent->right = NULL;
+          else if(isLeftChild(temp))
+            temp->parent->left =NULL;
           curr->value = temp->value;
           deleteNode(temp);
           break;

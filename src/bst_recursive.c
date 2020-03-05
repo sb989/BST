@@ -311,3 +311,32 @@ void printBstRec(Node *n)
   printBstRec(n->right);
 
 }
+
+void printLevelOrder(Node *root)
+{
+  int h,i;
+  h = height(root);
+  for(i=0;i<=h;i++)
+  {
+    printLevel(root,i);
+    printf("\n");
+  }
+}
+
+void printLevel(Node *root,int level)
+{
+  if(!root)
+  {
+    return;
+  }
+  if(level == 0)
+  {
+    printf("%d ",root->value);
+  }
+  else if(level>0)
+  {
+    printLevel(root->left,level-1);
+    printLevel(root->right,level-1);
+  }
+
+}
